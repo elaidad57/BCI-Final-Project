@@ -1,0 +1,158 @@
+%% Calculating features - Testing Set
+
+%MovingWinFeats(x, fs, winLen, winDisp, featfn)
+%MovingWinFeats_fft(x, fs, winLen, winDisp, lower_freq,upper_freq)
+window = 100;
+noverlap = 50;
+fs = 1000;
+nfft = 1024;
+
+%Subject 1
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:62
+	[s,f,t,ps] = spectrogram(data_1_test(:,i),window,noverlap,nfft,fs);
+    avg_volt_S1_test(:,i) = MovingWinFeats(data_1_test(:,i),samrate_1_test,.1,.05,avg_volt_feat);
+	freq_mag_1_S1_test(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S1_test(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S1_test(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S1_test(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S1_test(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+%Subject 2
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:48
+	[s,f,t,ps] = spectrogram(data_2_test(:,i),window,noverlap,nfft,fs);
+    avg_volt_S2_test(:,i) = MovingWinFeats(data_2_test(:,i),samrate_1_test,.1,.05,avg_volt_feat);
+	freq_mag_1_S2_test(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S2_test(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S2_test(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S2_test(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S2_test(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+%Subject 3
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:64
+	[s,f,t,ps] = spectrogram(data_3_test(:,i),window,noverlap,nfft,fs);
+    avg_volt_S3_test(:,i) = MovingWinFeats(data_3_test(:,i),samrate_1_test,.1,.05,avg_volt_feat);
+	freq_mag_1_S3_test(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S3_test(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S3_test(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S3_test(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S3_test(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+
+%% Making R - Testing Set
+R_test_S1 = [];
+
+time = 1;
+channel_count = 1;
+count = 1;
+set = 18;
+for j = 1:62
+    for i = 1:2944
+        R_test_S1(i,count:count+2) = avg_volt_S1_test(i:i+2,j);
+        count1 = count + (1*186);
+        R_test_S1(i,count1:count1+2) = freq_mag_1_S1_test(i+3:i+5,j);
+        count2 = count + (2*186);
+        R_test_S1(i,count2:count2+2) = freq_mag_2_S1_test(i+3:i+5,j);
+        count3 = count + (3*186);
+        R_test_S1(i,count3:count3+2) = freq_mag_3_S1_test(i+3:i+5,j);
+        count4 = count + (4*186);
+        R_test_S1(i,count4:count4+2) = freq_mag_4_S1_test(i+3:i+5,j);
+        count5 = count + (5*186);
+        R_test_S1(i,count5:count5+2) = freq_mag_5_S1_test(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%Subject 2
+R_test_S2 = [];
+time = 1;
+channel_count = 1;
+count = 1;
+set = 18;
+for j = 1:48
+    for i = 1:2944
+        R_test_S2(i,count:count+2) = avg_volt_S2_test(i:i+2,j);
+        count1 = count + (1*144);
+        R_test_S2(i,count1:count1+2) = freq_mag_1_S2_test(i+3:i+5,j);
+        count2 = count + (2*144);
+        R_test_S2(i,count2:count2+2) = freq_mag_2_S2_test(i+3:i+5,j);
+        count3 = count + (3*144);
+        R_test_S2(i,count3:count3+2) = freq_mag_3_S2_test(i+3:i+5,j);
+        count4 = count + (4*144);
+        R_test_S2(i,count4:count4+2) = freq_mag_4_S2_test(i+3:i+5,j);
+        count5 = count + (5*144);
+        R_test_S2(i,count5:count5+2) = freq_mag_5_S2_test(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%Subject 3
+R_test_S3 = [];
+time = 1;
+channel_count = 1;
+count = 1;
+set = 18;
+for j = 1:64
+    for i = 1:2944
+        R_test_S3(i,count:count+2) = avg_volt_S3_test(i:i+2,j);
+        count1 = count + (1*192);
+        R_test_S3(i,count1:count1+2) = freq_mag_1_S3_test(i+3:i+5,j);
+        count2 = count + (2*192);
+        R_test_S3(i,count2:count2+2) = freq_mag_2_S3_test(i+3:i+5,j);
+        count3 = count + (3*192);
+        R_test_S3(i,count3:count3+2) = freq_mag_3_S3_test(i+3:i+5,j);
+        count4 = count + (4*192);
+        R_test_S3(i,count4:count4+2) = freq_mag_4_S3_test(i+3:i+5,j);
+        count5 = count + (5*192);
+        R_test_S3(i,count5:count5+2) = freq_mag_5_S3_test(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%% Predictions
+predic_test_S1 = [];
+predic_test_S2 = [];
+predic_test_S3 = [];
+predic_test_S1 = R_test_S1*beta_S1;
+predic_test_S2 = R_test_S2*beta_S2;
+predic_test_S3 = R_test_S3*beta_S3;
+
+spl_predic_train_S1 = [];
+spl_predic_train_S2 = [];
+spl_predic_train_S3 = [];
+
+%Spline
+x1_test = 0:.05:147.15;
+x2_test = 0:.001:147.15;
+for i = 1:5
+    spl_predic_train_S1(:,i) = spline(x1_test,predic_test_S1(:,i),x2_test);
+    spl_predic_train_S2(:,i) = spline(x1_test,predic_test_S2(:,i),x2_test);
+    spl_predic_train_S3(:,i) = spline(x1_test,predic_test_S3(:,i),x2_test);
+end
+
+pad = zeros(349,5);
+spl_predic_test_S1 = [pad; spl_predic_train_S1];
+spl_predic_test_S2 = [pad; spl_predic_train_S2];
+spl_predic_test_S3 = [pad; spl_predic_train_S3];
+
+predicted_dg = {};
+predicted_dg{1} = spl_predic_test_S1;
+predicted_dg{2} = spl_predic_test_S2;
+predicted_dg{3} = spl_predic_test_S3;
