@@ -1,0 +1,659 @@
+%% Pulling raw data from portal
+% addpath(genpath('ieeg-matlab-1.13.2'))
+
+%% Subject 1 data - 62 channels
+% 
+% %Subject 1 - Training ECoG
+% session_1_train = IEEGSession('I521_A0012_D001', 'elaidad', 'ela_ieeglogin');
+% session_1_train.openDataSet('I521_A0012_D001');
+% for i = 1:62
+%     nr_1_train = ceil((session_1_train.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_1_train.data(1).sampleRate);
+%     data_1_train(:,i) = session_1_train.data(1).getvalues(1:nr_1_train, i:i);
+% end
+% dur_1_train = session_1_train.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_1_train = session_1_train.data.sampleRate;
+% 
+% %Subject 1 - Training Data Glove
+% session_1_glove = IEEGSession('I521_A0012_D002', 'elaidad', 'ela_ieeglogin');
+% session_1_glove.openDataSet('I521_A0012_D002');
+% for i = 1:5
+%     nr_1_glove = ceil((session_1_glove.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_1_glove.data(1).sampleRate);
+%     data_1_glove(:,i) = session_1_glove.data(1).getvalues(1:nr_1_glove, i:i);
+% end
+% dur_1_glove = session_1_glove.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_1_glove = session_1_glove.data.sampleRate;
+% 
+% %Subject 1 - Testing ECOG
+% session_1_test = IEEGSession('I521_A0012_D003', 'elaidad', 'ela_ieeglogin');
+% session_1_test.openDataSet('I521_A0012_D003');
+% for i = 1:62
+%     nr_1_test = ceil((session_1_test.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_1_test.data(1).sampleRate);
+%     data_1_test(:,i) = session_1_test.data(1).getvalues(1:nr_1_test, i:i);
+% end
+% dur_1_test = session_1_test.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_1_test = session_1_test.data.sampleRate;
+% 
+% %% Subject 2 - 48 channels
+% 
+% %Subject 2 - Training ECoG
+% session_2_train = IEEGSession('I521_A0013_D001', 'elaidad', 'ela_ieeglogin');
+% session_2_train.openDataSet('I521_A0013_D001');
+% for i = 1:48
+%     nr_2_train = ceil((session_2_train.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_2_train.data(1).sampleRate);
+%     data_2_train(:,i) = session_2_train.data(1).getvalues(1:nr_2_train, i:i);
+% end
+% dur_2_train = session_2_train.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_2_train = session_2_train.data.sampleRate;
+% 
+% %Subject 2 - Training Data Glove
+% session_2_glove = IEEGSession('I521_A0013_D002', 'elaidad', 'ela_ieeglogin');
+% session_2_glove.openDataSet('I521_A0013_D002');
+% for i = 1:5
+%     nr_2_glove = ceil((session_2_glove.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_2_glove.data(1).sampleRate);
+%     data_2_glove(:,i) = session_2_glove.data(1).getvalues(1:nr_2_glove, i:i);
+% end
+% dur_2_glove = session_2_glove.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_2_glove = session_2_glove.data.sampleRate;
+% 
+% %Subject 2 - Testing ECOG
+% session_2_test = IEEGSession('I521_A0013_D003', 'elaidad', 'ela_ieeglogin');
+% session_2_test.openDataSet('I521_A0013_D003');
+% for i = 1:48
+%     nr_2_test = ceil((session_2_test.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_2_test.data(1).sampleRate);
+%     data_2_test(:,i) = session_2_test.data(1).getvalues(1:nr_2_test, i:i);
+% end
+% dur_2_test = session_2_test.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_2_test = session_2_test.data.sampleRate;
+% 
+% 
+% %% Subject 3 - 64 channels
+% 
+% %Subject 3 - Training ECoG
+% session_3_train = IEEGSession('I521_A0014_D001', 'elaidad', 'ela_ieeglogin');
+% session_3_train.openDataSet('I521_A0014_D001');
+% for i = 1:64
+%     nr_3_train = ceil((session_3_train.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_3_train.data(1).sampleRate);
+%     data_3_train(:,i) = session_3_train.data(1).getvalues(1:nr_3_train, i:i);
+% end
+% dur_3_train = session_3_train.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_3_train = session_3_train.data.sampleRate;
+% 
+% %Subject 3 - Training Data Glove
+% session_3_glove = IEEGSession('I521_A0014_D002', 'elaidad', 'ela_ieeglogin');
+% session_3_glove.openDataSet('I521_A0014_D002');
+% for i = 1:5
+%     nr_3_glove = ceil((session_3_glove.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_3_glove.data(1).sampleRate);
+%     data_3_glove(:,i) = session_3_glove.data(1).getvalues(1:nr_3_glove, i:i);
+% end
+% dur_3_glove = session_3_glove.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_3_glove = session_3_glove.data.sampleRate;
+% 
+% %Subject 3 - Testing ECOG
+% session_3_test = IEEGSession('I521_A0014_D003', 'elaidad', 'ela_ieeglogin');
+% session_3_test.openDataSet('I521_A0014_D003');
+% for i = 1:64
+%     nr_3_test = ceil((session_3_test.data(1).rawChannels(i).get_tsdetails.getEndTime)/1e6*session_3_test.data(1).sampleRate);
+%     data_3_test(:,i) = session_3_test.data(1).getvalues(1:nr_3_test, i:i);
+% end
+% dur_3_test = session_3_test.data(1).rawChannels(1).get_tsdetails.getDuration;
+% samrate_3_test = session_3_test.data.sampleRate;
+
+%% Loading raw data
+load('rawdata')
+
+%% Creating Features
+
+NumWins = @(xLen, fs, winLen, winDisp) floor((xLen-(winLen*fs) + ...
+    (winDisp*fs))/(winDisp*fs));
+
+avg_volt_feat = @(x) mean(x);
+
+%% Calculating features - Training Set
+
+%MovingWinFeats(x, fs, winLen, winDisp, featfn)
+%MovingWinFeats_fft(x, fs, winLen, winDisp, lower_freq,upper_freq)
+window = 100;
+noverlap = 50;
+fs = 1000;
+nfft = 1024;
+
+%Subject 1
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:62
+	[s,f,t,ps] = spectrogram(data_1_train(:,i),window,noverlap,nfft,fs);
+    avg_volt_S1_train(:,i) = MovingWinFeats(data_1_train(:,i),samrate_1_train,.1,.05,avg_volt_feat);
+	freq_mag_1_S1_train(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S1_train(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S1_train(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S1_train(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S1_train(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+%Subject 2
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:48
+	[s,f,t,ps] = spectrogram(data_2_train(:,i),window,noverlap,nfft,fs);
+    avg_volt_S2_train(:,i) = MovingWinFeats(data_2_train(:,i),samrate_1_train,.1,.05,avg_volt_feat);
+	freq_mag_1_S2_train(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S2_train(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S2_train(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S2_train(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S2_train(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+%Subject 3
+s = [];
+f = [];
+t = [];
+ps = [];
+freq = [5,15; 20,25; 75,115; 125,160; 160,175];
+for i = 1:64
+	[s,f,t,ps] = spectrogram(data_3_train(:,i),window,noverlap,nfft,fs);
+    avg_volt_S3_train(:,i) = MovingWinFeats(data_3_train(:,i),samrate_1_train,.1,.05,avg_volt_feat);
+	freq_mag_1_S3_train(:,i) = mean(abs(s(f >= freq(1,1) & f <= freq(1,2),:)));
+	freq_mag_2_S3_train(:,i) = mean(abs(s(f >= freq(2,1) & f <= freq(2,2),:)));
+	freq_mag_3_S3_train(:,i) = mean(abs(s(f >= freq(3,1) & f <= freq(3,2),:)));
+	freq_mag_4_S3_train(:,i) = mean(abs(s(f >= freq(4,1) & f <= freq(4,2),:)));
+	freq_mag_5_S3_train(:,i) = mean(abs(s(f >= freq(5,1) & f <= freq(5,2),:)));
+end
+
+%% Calculating features - Testing Set
+% % Subject 1
+% avg_volt_S1_train2 = [];
+% for i = 1:62
+%     avg_volt_S1_train2(:,i) = MovingWinFeats(data_1_train(155001:end,i),samrate_1_train,.1,.05,avg_volt_feat);
+% end
+% 
+% s = {};
+% f = [];
+% t = [];
+% ps = {};
+% for i = 1:62
+%     [s{i},f,t(:,i),ps{i}] = spectrogram(data_1_train(155001:end,i),window,noverlap,nfft,fs);
+% end
+% 
+% % band 1
+% lower_freq = 5;
+% upper_freq = 15;
+% freq_mag_1_S1_train2 = [];
+% for i = 1:62
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_1_S1_train2(:,i) = mean(set,1)';
+% end
+% 
+% % band 2
+% lower_freq = 20;
+% upper_freq = 25;
+% freq_mag_2_S1_train2 = [];
+% for i = 1:62
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_2_S1_train2(:,i) = mean(set,1)';
+%  end
+% 
+% %band 3
+% lower_freq = 75;
+% upper_freq = 115;
+% freq_mag_3_S1_train2 = [];
+% for i = 1:62
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_3_S1_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 4
+% lower_freq = 125;
+% upper_freq = 160;
+% freq_mag_4_S1_train2 = [];
+% for i = 1:62
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_4_S1_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 5
+% lower_freq = 160;
+% upper_freq = 175;
+% freq_mag_5_S1_train2 = [];
+% for i = 1:62
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_5_S1_train2(:,i) = mean(set,1)';
+% end
+% 
+% % Subject 2
+% avg_volt_S2_train2 = [];
+% for i = 1:48
+%     avg_volt_S2_train2(:,i) = MovingWinFeats(data_2_train(155001:end,i),samrate_1_train,.1,.05,avg_volt_feat);
+% end
+% 
+% s = {};
+% f = [];
+% t = [];
+% ps = {};
+% for i = 1:48
+%     [s{i},f,t(:,i),ps{i}] = spectrogram(data_2_train(155001:end,i),window,noverlap,nfft,fs);
+% end
+% 
+% % band 1
+% lower_freq = 5;
+% upper_freq = 15;
+% freq_mag_1_S2_train2 = [];
+% for i = 1:48
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_1_S2_train2(:,i) = mean(set,1)';
+% end
+% 
+% % band 2
+% lower_freq = 20;
+% upper_freq = 25;
+% freq_mag_2_S2_train2 = [];
+% for i = 1:48
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_2_S2_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 3
+% lower_freq = 75;
+% upper_freq = 115;
+% freq_mag_3_S2_train2 = [];
+% for i = 1:48
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_3_S2_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 4
+% lower_freq = 125;
+% upper_freq = 160;
+% freq_mag_4_S2_train2 = [];
+% for i = 1:48
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_4_S2_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 5
+% lower_freq = 160;
+% upper_freq = 175;
+% freq_mag_5_S2_train2 = [];
+% for i = 1:48
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_5_S2_train2(:,i) = mean(set,1)';
+% end
+% 
+% % Subject 3
+% avg_volt_S3_train2 = [];
+% for i = 1:64
+%     avg_volt_S3_train2(:,i) = MovingWinFeats(data_3_train(155001:end,i),samrate_1_train,.1,.05,avg_volt_feat);
+% end
+% 
+% s = {};
+% f = [];
+% t = [];
+% ps = {};
+% for i = 1:64
+%     [s{i},f,t(:,i),ps{i}] = spectrogram(data_3_train(155001:end,i),window,noverlap,nfft,fs);
+% end
+% 
+% % band 1
+% lower_freq = 5;
+% upper_freq = 15;
+% freq_mag_1_S3_train2 = [];
+% for i = 1:64
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_1_S3_train2(:,i) = mean(set,1)';
+% end
+% 
+% % band 2
+% lower_freq = 20;
+% upper_freq = 25;
+% freq_mag_2_S3_train2 = [];
+% for i = 1:64
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_2_S3_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 3
+% lower_freq = 75;
+% upper_freq = 115;
+% freq_mag_3_S3_train2 = [];
+% for i = 1:64
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_3_S3_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 4
+% lower_freq = 125;
+% upper_freq = 160;
+% freq_mag_4_S3_train2 = [];
+% for i = 1:64
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_4_S3_train2(:,i) = mean(set,1)';
+% end
+% 
+% %band 5
+% lower_freq = 160;
+% upper_freq = 175;
+% freq_mag_5_S3_train2 = [];
+% for i = 1:64
+%     data = s{1,i}; data = abs(data);
+%     one = 1;
+%     set = [];
+%     for j = 1:length(f)
+%         if f(j) >= lower_freq && f(j) <= upper_freq
+%             set(one,:) = data(j,:);
+%             one = one + 1;
+%         end
+%     end
+%     freq_mag_5_S3_train2(:,i) = mean(set,1)';
+% end
+
+ %% Making R - Testing Set
+% X_S1_2 = [];
+% 
+% time = 1;
+% channel_count = 1;
+% count = 1;
+% set = 18;
+% for j = 1:62
+%     for i = 1:3094
+%         X_S1_2(i,count:count+2) = avg_volt_S1_train2(i:i+2,j);
+%         count1 = count + (1*186);
+%         X_S1_2(i,count1:count1+2) = freq_mag_1_S1_train2(i+3:i+5,j);
+%         count2 = count + (2*186);
+%         X_S1_2(i,count2:count2+2) = freq_mag_2_S1_train2(i+3:i+5,j);
+%         count3 = count + (3*186);
+%         X_S1_2(i,count3:count3+2) = freq_mag_3_S1_train2(i+3:i+5,j);
+%         count4 = count + (4*186);
+%         X_S1_2(i,count4:count4+2) = freq_mag_4_S1_train2(i+3:i+5,j);
+%         count5 = count + (5*186);
+%         X_S1_2(i,count5:count5+2) = freq_mag_5_S1_train2(i+3:i+5,j);
+%     end
+%     count = count + 3;
+% end
+% 
+% %Subject 2
+% X_S2_2 = [];
+% time = 1;
+% channel_count = 1;
+% count = 1;
+% set = 18;
+% for j = 1:48
+%     for i = 1:3094
+%         X_S2_2(i,count:count+2) = avg_volt_S2_train2(i:i+2,j);
+%         count1 = count + (1*144);
+%         X_S2_2(i,count1:count1+2) = freq_mag_1_S2_train2(i+3:i+5,j);
+%         count2 = count + (2*144);
+%         X_S2_2(i,count2:count2+2) = freq_mag_2_S2_train2(i+3:i+5,j);
+%         count3 = count + (3*144);
+%         X_S2_2(i,count3:count3+2) = freq_mag_3_S2_train2(i+3:i+5,j);
+%         count4 = count + (4*144);
+%         X_S2_2(i,count4:count4+2) = freq_mag_4_S2_train2(i+3:i+5,j);
+%         count5 = count + (5*144);
+%         X_S2_2(i,count5:count5+2) = freq_mag_5_S2_train2(i+3:i+5,j);
+%     end
+%     count = count + 3;
+% end
+% 
+% %Subject 3
+% X_S3_2 = [];
+% time = 1;
+% channel_count = 1;
+% count = 1;
+% set = 18;
+% for j = 1:64
+%     for i = 1:3094
+%         X_S3_2(i,count:count+2) = avg_volt_S3_train2(i:i+2,j);
+%         count1 = count + (1*192);
+%         X_S3_2(i,count1:count1+2) = freq_mag_1_S3_train2(i+3:i+5,j);
+%         count2 = count + (2*192);
+%         X_S3_2(i,count2:count2+2) = freq_mag_2_S3_train2(i+3:i+5,j);
+%         count3 = count + (3*192);
+%         X_S3_2(i,count3:count3+2) = freq_mag_3_S3_train2(i+3:i+5,j);
+%         count4 = count + (4*192);
+%         X_S3_2(i,count4:count4+2) = freq_mag_4_S3_train2(i+3:i+5,j);
+%         count5 = count + (5*192);
+%         X_S3_2(i,count5:count5+2) = freq_mag_5_S3_train2(i+3:i+5,j);
+%     end
+%     count = count + 3;
+% end
+
+%% Processing glove data
+data_1_glove_new = [];
+for i = 1:5
+    st = 1;
+    for j = 1:6200
+        data_1_glove_new(j,i) = data_1_glove(st,i);
+        data_2_glove_new(j,i) = data_2_glove(st,i);
+        data_3_glove_new(j,i) = data_3_glove(st,i);
+        st = st + 50;
+    end
+end
+
+%% Making R - Training set
+lag = 6*.05*1000;
+N_train = NumWins(length(data_1_train),1000,.1,.05);
+
+X_S1 = [];
+channel_count = 1;
+count = 1;
+for j = 1:62
+    for i = 1:N_train-5
+        X_S1(i,count:count+2) = avg_volt_S1_train(i:i+2,j);
+        count1 = count + (1*186);
+        X_S1(i,count1:count1+2) = freq_mag_1_S1_train(i+3:i+5,j);
+        count2 = count + (2*186);
+        X_S1(i,count2:count2+2) = freq_mag_2_S1_train(i+3:i+5,j);
+        count3 = count + (3*186);
+        X_S1(i,count3:count3+2) = freq_mag_3_S1_train(i+3:i+5,j);
+        count4 = count + (4*186);
+        X_S1(i,count4:count4+2) = freq_mag_4_S1_train(i+3:i+5,j);
+        count5 = count + (5*186);
+        X_S1(i,count5:count5+2) = freq_mag_5_S1_train(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%Subject 2
+X_S2 = [];
+channel_count = 1;
+count = 1;
+for j = 1:48
+    for i = 1:N_train-5
+        X_S2(i,count:count+2) = avg_volt_S2_train(i:i+2,j);
+        count1 = count + (1*144);
+        X_S2(i,count1:count1+2) = freq_mag_1_S2_train(i+3:i+5,j);
+        count2 = count + (2*144);
+        X_S2(i,count2:count2+2) = freq_mag_2_S2_train(i+3:i+5,j);
+        count3 = count + (3*144);
+        X_S2(i,count3:count3+2) = freq_mag_3_S2_train(i+3:i+5,j);
+        count4 = count + (4*144);
+        X_S2(i,count4:count4+2) = freq_mag_4_S2_train(i+3:i+5,j);
+        count5 = count + (5*144);
+        X_S2(i,count5:count5+2) = freq_mag_5_S2_train(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%Subject 3
+X_S3 = [];
+channel_count = 1;
+count = 1;
+for j = 1:64
+    for i = 1:N_train-5
+        X_S3(i,count:count+2) = avg_volt_S3_train(i:i+2,j);
+        count1 = count + (1*192);
+        X_S3(i,count1:count1+2) = freq_mag_1_S3_train(i+3:i+5,j);
+        count2 = count + (2*192);
+        X_S3(i,count2:count2+2) = freq_mag_2_S3_train(i+3:i+5,j);
+        count3 = count + (3*192);
+        X_S3(i,count3:count3+2) = freq_mag_3_S3_train(i+3:i+5,j);
+        count4 = count + (4*192);
+        X_S3(i,count4:count4+2) = freq_mag_4_S3_train(i+3:i+5,j);
+        count5 = count + (5*192);
+        X_S3(i,count5:count5+2) = freq_mag_5_S3_train(i+3:i+5,j);
+    end
+    count = count + 3;
+end
+
+%% Linear regression
+format compact
+Y_S1 = data_1_glove_new(:,:);
+Y_S2 = data_2_glove_new(:,:);
+Y_S3 = data_3_glove_new(:,:);
+
+beta_S1 = mldivide(X_S1'*X_S1,X_S1'*Y_S1(7:end,:));
+beta_S2 = mldivide(X_S2'*X_S2,X_S2'*Y_S2(7:end,:));
+beta_S3 = mldivide(X_S3'*X_S3,X_S3'*Y_S3(7:end,:));
+
+ %% Predictions
+% predic_train_S1 = [];
+% predic_train_S2 = [];
+% predic_train_S3 = [];
+% predic_train_S1 = X_S1_2*beta_S1;
+% predic_train_S2 = X_S2_2*beta_S2;
+% predic_train_S3 = X_S3_2*beta_S3;
+% 
+% 
+% corr1 = corr(predic_train_S1,data_1_glove_new(3107:end,:))
+% corr2 = corr(predic_train_S2,data_2_glove_new(3107:end,:))
+% corr3 = corr(predic_train_S3,data_3_glove_new(3107:end,:))
+
+ %% Spline
+% % 
+% x1 = 0:.05:309.75;
+% x2 = 0:.001:309.995;
+% for i = 1:5
+%     spl_predic_train_S1(:,i) = spline(x1,predic_train_S1(:,i),x2);
+%     spl_predic_train_S2(:,i) = spline(x1,predic_train_S2(:,i),x2);
+%     spl_predic_train_S3(:,i) = spline(x1,predic_train_S2(:,i),x2);
+% end
+% % size(spl_predic_train_S1)
+% % size(spl_predic_train_S2)
+% % size(spl_predic_train_S3)
+% % 
+% % 
+% % 
+% % 
+% % 
+% % figure
+% % plot(predic_train_S1(:,1))
+% % % hold on
+% % % plot(data_1_glove(:,1))
+% % % legend('Predicted','Actual')
+% % % hold off
